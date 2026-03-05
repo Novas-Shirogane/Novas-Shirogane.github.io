@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 
@@ -156,6 +157,18 @@ function WorksSidebar() {
 }
 
 function Layout() {
+
+  const [count, setCount] = useState("000000")
+
+  useEffect(() => {
+    fetch("https://api.countapi.xyz/hit/novas-leopard/visits")
+      .then(r => r.json())
+      .then(data => {
+        const padded = data.value.toString().padStart(6,"0")
+        setCount(padded)
+      })
+  }, [])
+
   return (
     <div className="bg-[#b8b8b8] text-white min-h-screen flex flex-col">
       <WorksSidebar />
@@ -176,8 +189,11 @@ function Layout() {
           <Outlet />
         </main>
 
-        <footer className="bg-[#5e5b5b] mt-12 text-xs text-white">
-          © {new Date().getFullYear()} Novas-Leopard
+        <footer className="bg-[#000000] mt-12 text-xs text-white text-center">
+          <div className="counter">{ count }</div>
+          <p className="mt-2">
+            © {new Date().getFullYear()} Novas-Leopard
+          </p>
         </footer>
       </div>
     </div>

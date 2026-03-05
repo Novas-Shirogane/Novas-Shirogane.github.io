@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+.counter{
+  font-family: 'Press Start 2P', monospace;
+  background:black;
+  color:#00ff66;
+  padding:10px;
+  letter-spacing:4px;
+  display:inline-block;
+}
