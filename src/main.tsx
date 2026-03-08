@@ -23,6 +23,10 @@ function guessTitle(md: string) {
 }
 
 const posts: Post[] = Object.entries(mdModules)
+  .filter(([path]) => {
+    const filename = path.split('/').pop() ?? ''
+    return !filename.startsWith('_') && filename !== 'template.md'
+  })
   .map(([filePath, body]) => {
     const slug = filePath.replace('../content/', '').replace(/\.md$/, '')
     const dateKey = slug.split('/').at(-1) ?? slug
@@ -180,7 +184,7 @@ function Layout() {
             <Link to="/" className="hover:text-zinc-200">週報</Link>
           </h1>
           <p className="mt-2 text-sm text-zinc-400">
-            content/xxxx/yy/zz.md を追加すると自動で増える
+            サイドバーになんかあるけど嘘です。どこにも飛びませんm(- -)m
           </p>
           <SegNav />
         </header>
